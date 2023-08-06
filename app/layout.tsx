@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter as Nunito } from 'next/font/google'
+import ClientOnly from './components/ClientOnly'
 import NavBar from './components/navbar/NavBar'
 import './globals.css'
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
-        <NavBar />
+        <ClientOnly>
+          <NavBar />
+        </ClientOnly>
         {children}
       </body>
     </html>
