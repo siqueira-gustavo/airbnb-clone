@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter as Nunito } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader'
 import ClientOnly from './components/ClientOnly'
-import Modal from './components/modlas/Modal'
+import RegisterModal from './components/modals/RegisterModal'
 import NavBar from './components/navbar/NavBar'
 import './globals.css'
+import ToasterProvider from './providers/ToasterProvider'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -20,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
+        <NextTopLoader color='red' />
         <ClientOnly>
-          <Modal isOpen />
+          <ToasterProvider />
+          <RegisterModal />
           <NavBar />
         </ClientOnly>
         {children}
