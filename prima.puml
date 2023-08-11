@@ -1,0 +1,61 @@
+@startuml
+class User {
+  String: id
+  String?: name
+  String?: image
+  String?: hashedPassword
+  String?: email
+  DateTime?: emailVerified
+  DateTime: createdAt
+  DateTime: updatedAt
+  String[]: faviriteIds
+  + create()
+  + update()
+  + delete()
+  + find()
+}
+
+class Account {
+  String: id
+  String: userId
+  String: type
+  String: provider
+  String: providerAccountId
+  String?: refresh_token
+  String?: access_token
+  String?: token_type
+  String?: scope
+  String?: id_token
+  String?: session_state
+  Int?: expires_at
+}
+
+class Listings {
+  String: id
+  String: userId
+  String: title
+  String: description
+  String: imageSrc
+  String: category
+  String: locationValue
+  Int: roomCount
+  Int: bathroomCount
+  Int: guestCount
+  Int: price
+  DateTime: createdAt
+}
+
+class Reservations {
+}
+
+User "1" -- "0..*" Account
+User "1" -- "0..*" Listings
+User "1" -- "0..*" Reservations
+
+Account ..|> User: userId
+
+Listings ..|> User: userId
+
+Reservations ..|> User: userId
+
+@enduml
