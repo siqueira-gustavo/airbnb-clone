@@ -1,4 +1,4 @@
-@startuml
+@startuml PrismaModel
 class User {
   String: id
   String?: name
@@ -30,7 +30,7 @@ class Account {
   Int?: expires_at
 }
 
-class Listings {
+class Listing {
   String: id
   String: userId
   String: title
@@ -42,20 +42,31 @@ class Listings {
   Int: bathroomCount
   Int: guestCount
   Int: price
-  DateTime: createdAt
+  DateTime: createdAt  
 }
 
-class Reservations {
+class Reservation {
+  String: id
+  String: userId
+  String: listingId
+  Int: totalPrice
+  DateTime: startDate
+  DateTime: endDate
+  DateTime: createdAt  
 }
 
-User "1" -- "0..*" Account
-User "1" -- "0..*" Listings
-User "1" -- "0..*" Reservations
+User "1" -- "0..*" Account : accounts <
+User "1" -- "0..*" Listing : listings <
+User "1" -- "0..*" Reservation : reservations <
 
-Account ..|> User: userId
+Account ..|> User : userId
 
-Listings ..|> User: userId
+Listing ..|> User : userId
 
-Reservations ..|> User: userId
+Reservation ..|> User : userId
+
+Listing "1" -- "0..*" Reservation : reservations <
+
+Reservation ..|> Listing : listingId
 
 @enduml
